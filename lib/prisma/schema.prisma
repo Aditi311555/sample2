@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL") // Ensure this is set in your .env file
+}
+
+model User {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  role             String
+  email            String   @unique
+  password         String
+  aadhaar          String
+  state            String
+  city             String
+  zipcode          String
+  address          String
+  mobile           String
+  verificationMode String?
+  emailVerified    Boolean  @default(false)
+  imageFile        String?   // Optional
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
